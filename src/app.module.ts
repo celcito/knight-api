@@ -4,10 +4,9 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { KnigtsModule } from './knigts/knigts.module';
 
-
 @Module({
   controllers: [AppController],
   providers: [AppService],
-  imports: [KnigtsModule,MongooseModule.forRoot('mongodb://127.0.0.1:27017',{ dbName: 'knigts' })],
+  imports: [MongooseModule.forRoot('mongodb://127.0.0.1:27017',{ dbName: 'knigts' }),KnigtsModule],
 })
 export class AppModule {}
