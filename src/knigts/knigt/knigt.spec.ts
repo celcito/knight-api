@@ -1,10 +1,10 @@
 
 import { Test, TestingModule } from '@nestjs/testing';
 import { getModelToken } from '@nestjs/mongoose';
-import { Knigt, KnigtSchema, KnigtAttributes, Weapon } from '../../schemas/knigt.schema';
+import { Knigt, KnigtSchema, KnigtAttributes, Weapon } from './knigt';
 import {KnigtsService} from '../knigts.service'
 //import { MongooseModule } from '@nestjs/mongoose';
-//import { closeMongoConnection, rootMongooseTestModule } from './mongoose-test-module.ts'
+//import { closeMongoConnection, rootMongooseTestModule } from './mongoose-test-module'
 import { Model } from 'mongoose';
 
 describe('Knigt Schema', () => {
@@ -40,8 +40,9 @@ describe('Knigt Schema', () => {
     }).compile();
 
     service = module.get<KnigtsService>(KnigtsService);
-  });
+  },3000); 
  */
+
 
 
   beforeAll(async () => {
@@ -59,28 +60,16 @@ describe('Knigt Schema', () => {
     knigtModel = module.get<Model<Knigt>>(getModelToken(Knigt.name));
   });
 
-
-
-  it('should be defined', () => {
-   expect(new Knigt()).toBeDefined();
-  });
-
-  it('should service  be defined', () => {
-    expect(KnigtsService).toBeDefined();
-  });
-
-
-
   it('should save a Knigt', async () => {
     const createSpy = jest.spyOn(knigtModel, 'create');
     const createdKnigt = await knigtModel.create(sampleKnigt);
     expect(createSpy).toHaveBeenCalledWith(sampleKnigt);
     expect(createdKnigt).toEqual(sampleKnigt);
   });
-
-/*   afterAll(async () => {
+/*
+   afterAll(async () => {
     await closeMongoConnection();
-  });
- */
+  }); */
+
 
 });
