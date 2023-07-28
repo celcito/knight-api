@@ -58,9 +58,14 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-Api docs
+## Api docs
 
-http://localhost:3000/api
+```bash
+
+  http://localhost:3000/api
+
+
+```
 
 ## Support
 
