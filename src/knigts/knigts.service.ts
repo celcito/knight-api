@@ -34,15 +34,35 @@ export class KnigtsService {
 
   async searchById(id: string): Promise<Knigt> {
       try {
-        return this.knigtModel.findById(id).exec() || null
+
+        if (!id)      
+        throw new NotFoundException('Cavaleiro não encontrado.');
+
+       
+        
+        const knight = this.knigtModel.findById(id).exec() || null
+
+        if (!knight) {
+          throw new NotFoundException('Cavaleiro não encontrado.');
+        }
+        return await knight
       } catch (error) {
-        return null;
+        throw new NotFoundException('Cavaleiro não encontrado.');
       }
   }
 
   async updateKnigts(id: string, knigt: Knigt): Promise<Knigt> {
     try {
-      return this.knigtModel.findByIdAndUpdate(id, knigt,{ "new": true}).exec();
+      if (!id)      
+      throw new NotFoundException('Cavaleiro não encontrado.');
+
+    
+      const knight =this.knigtModel.findByIdAndUpdate(id, knigt,{ "new": true}).exec();
+      if (!knight) {
+        throw new NotFoundException('Cavaleiro não encontrado.');
+      }
+
+      return await knight
     } catch (error) {
       throw new HttpException('Erro ao atualizar o knigt', HttpStatus.BAD_REQUEST);
     }
