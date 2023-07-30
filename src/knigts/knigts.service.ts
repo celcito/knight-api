@@ -73,7 +73,7 @@ export class KnigtsService {
       const knigtRemoved = this.knigtModel.findOneAndDelete({ _id: id }).exec();
       return await knigtRemoved;    
     } catch (error) {
-      throw new HttpException('Erro ao atualizar o knigt', HttpStatus.BAD_REQUEST);
+      throw new HttpException('Erro ao deletar o knigt', HttpStatus.BAD_REQUEST);
     }
   } 
 }
