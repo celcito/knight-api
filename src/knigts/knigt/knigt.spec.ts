@@ -1,10 +1,9 @@
-
 import { Test, TestingModule } from '@nestjs/testing';
 import { getModelToken } from '@nestjs/mongoose';
 import { Knigt, KnigtSchema, KnigtAttributes, Weapon } from './knigt';
 import {KnigtsService} from '../knigts.service'
-//import { MongooseModule } from '@nestjs/mongoose';
-//import { closeMongoConnection, rootMongooseTestModule } from './mongoose-test-module'
+import { MongooseModule } from '@nestjs/mongoose';
+import { closeMongoConnection, rootMongooseTestModule } from './mongoose-test-module'
 import { Model } from 'mongoose';
 
 describe('Knigt Schema', () => {
@@ -30,7 +29,7 @@ describe('Knigt Schema', () => {
     keyAttribute: 'charisma',
   };
 
-/*   beforeEach(async () => {
+  beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
         rootMongooseTestModule(),
@@ -40,9 +39,7 @@ describe('Knigt Schema', () => {
     }).compile();
 
     service = module.get<KnigtsService>(KnigtsService);
-  },3000); 
- */
-
+  },10000); 
 
 
   beforeAll(async () => {
@@ -61,15 +58,19 @@ describe('Knigt Schema', () => {
   });
 
   it('should save a Knigt', async () => {
+    
     const createSpy = jest.spyOn(knigtModel, 'create');
+    console.log("createSpy",createSpy)
+
     const createdKnigt = await knigtModel.create(sampleKnigt);
+    console.log("createdKnigt",createdKnigt)
     expect(createSpy).toHaveBeenCalledWith(sampleKnigt);
     expect(createdKnigt).toEqual(sampleKnigt);
   });
-/*
-   afterAll(async () => {
+
+    afterAll(async () => {
     await closeMongoConnection();
-  }); */
+  });
 
 
 });
